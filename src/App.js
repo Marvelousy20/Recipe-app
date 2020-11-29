@@ -13,7 +13,7 @@ const getExample = 'https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID
 function App() {
   const [search, setSearch] = React.useState('')
   const [recipes, setRecipes] = React.useState([]) ; // I am gettin an array from the API
-  const [query, setQuery] = React.useState('')
+  const [query, setQuery] = React.useState('chicken')
 
   // Runs only after the submit button as been clicked
   React.useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
   }
 
   const getRecipe = async (e) => {
-    const url = `https://api.edamam.com/search?q=${search}&app_id=${api.id}&app_key=${api.key}`
+    const url = `https://api.edamam.com/search?q=${query}&app_id=${api.id}&app_key=${api.key}`
     const response = await Axios.get(url)
 
     const { data } = await response;
@@ -57,13 +57,15 @@ function App() {
           
       <MDBRow className = 'my-5'> 
         <MDBCol style = {{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-          {recipes.map((recipe, i) => (
-            <div className = 'py-2'>
+          {recipes.map((recipe, index) => (
+            <div key = {index}  className = 'py-2'>
               <Recipes
-                key = {recipe.i} 
                 image = {recipe.recipe.image}
                 title = {recipe.recipe.label}
                 calories = {recipe.recipe.calories}
+                ingredients = {recipe.recipe.ingredients}
+                dietLabels = {recipe.recipe.dietLabels}
+                recipe = {recipe}
               />
             </div>   
           ))}

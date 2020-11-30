@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <MDBContainer>
+    <MDBContainer className = 'my-2'>
       <MDBRow>
         <MDBCol className = 'd-flex justify-content-center'>
           <form onSubmit = {changeQuery} style = {{width: '100%', textAlign: 'center'}}>
